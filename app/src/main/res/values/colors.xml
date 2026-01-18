@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="neo_background">#ECECEC</color>
+    <color name="neo_shadow_dark">#BEBEBE</color>
+    <color name="neo_shadow_light">#FFFFFF</color>
+    <color name="neo_text">#333333</color>
 </resources>

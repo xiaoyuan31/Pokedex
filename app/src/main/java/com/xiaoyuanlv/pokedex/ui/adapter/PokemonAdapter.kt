@@ -9,9 +9,7 @@ import com.xiaoyuanlv.pokedex.databinding.ItemPokemonBinding
 
 class PokemonAdapter :
     RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
-
     private val items = mutableListOf<Pokemon>()
-
     inner class PokemonViewHolder(
         val binding: ItemPokemonBinding
     ) : RecyclerView.ViewHolder(binding.root)
