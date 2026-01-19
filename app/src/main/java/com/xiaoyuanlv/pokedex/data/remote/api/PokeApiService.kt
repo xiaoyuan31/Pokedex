@@ -1,6 +1,6 @@
-package com.xiaoyuanlv.pokedex.data.remote
+package com.xiaoyuanlv.pokedex.data.remote.api
 
-import com.xiaoyuanlv.pokedex.data.model.PokemonResponse
+import com.xiaoyuanlv.pokedex.data.remote.dto.PokemonResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

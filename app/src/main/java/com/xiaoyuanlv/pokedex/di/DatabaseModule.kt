@@ -2,7 +2,7 @@ package com.xiaoyuanlv.pokedex.di
 
 import android.content.Context
 import androidx.room.Room
-import com.xiaoyuanlv.pokedex.data.local.PokedexDatabase
+import com.xiaoyuanlv.pokedex.data.local.database.PokedexDatabase
 import com.xiaoyuanlv.pokedex.data.local.dao.PokemonDao
 import dagger.Module
 import dagger.Provides

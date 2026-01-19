@@ -1,6 +1,6 @@
 package com.xiaoyuanlv.pokedex.di
 
-import com.xiaoyuanlv.pokedex.data.remote.PokeApiService
+import com.xiaoyuanlv.pokedex.data.remote.api.PokeApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,26 +1,25 @@
 package com.xiaoyuanlv.pokedex.data.repository
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.xiaoyuanlv.pokedex.data.local.dao.PokemonDao
+import com.xiaoyuanlv.pokedex.data.local.database.PokedexDatabase
 import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
-import com.xiaoyuanlv.pokedex.data.model.Pokemon
-import com.xiaoyuanlv.pokedex.data.remote.PokeApiService
+import com.xiaoyuanlv.pokedex.data.remote.api.PokeApiService
+import com.xiaoyuanlv.pokedex.data.remote.mediator.PokemonRemoteMediator
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
     private val api: PokeApiService,
-    private val dao: PokemonDao
+    private val db: PokedexDatabase
 ) {
-    suspend fun getPokemon() : List<Pokemon> {
-        return try {
-            val remote = api.getPokemonList().results
-            dao.insertAll(remote.map {
-                PokemonEntity(it.name, it.url)
-            })
-            remote
-        } catch (e: Exception) {
-            dao.getAll().map {
-                Pokemon(it.name, it.url)
-            }
-        }
-    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun getPokemonPaging() = Pager(
+        config = PagingConfig(pageSize = 20),
+        remoteMediator = PokemonRemoteMediator(api, db),
+        pagingSourceFactory = { db.pokemonDao().pagingSource() }
+    ).flow
+
 }

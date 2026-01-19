@@ -1,4 +1,4 @@
-package com.xiaoyuanlv.pokedex.data.local
+package com.xiaoyuanlv.pokedex.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

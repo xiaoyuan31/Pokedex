@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/pokemonFragment"
-        android:name="com.xiaoyuanlv.pokedex.ui.PokemonFragment"
+        android:name="com.xiaoyuanlv.pokedex.ui.pokemon.PokemonFragment"
         android:label="PokemonFragment" />
 </navigation>

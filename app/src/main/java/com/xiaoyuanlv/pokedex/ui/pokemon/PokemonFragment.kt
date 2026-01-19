@@ -1,4 +1,4 @@
-package com.xiaoyuanlv.pokedex.ui
+package com.xiaoyuanlv.pokedex.ui.pokemon
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -6,20 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.xiaoyuanlv.pokedex.R
 import com.xiaoyuanlv.pokedex.databinding.FragmentPokemonBinding
-import com.xiaoyuanlv.pokedex.ui.adapter.PokemonAdapter
+import com.xiaoyuanlv.pokedex.ui.adapter.PokemonPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PokemonFragment : Fragment() {
 
     private var _binding: FragmentPokemonBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: PokemonAdapter
-
+    private val adapter = PokemonPagingAdapter()
 
     private val viewModel: PokemonViewModel by viewModels()
 
@@ -35,7 +35,7 @@ class PokemonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = PokemonAdapter()
+
 
         binding.recyclerView.layoutManager = GridLayoutManager(
             requireContext(),
@@ -47,11 +47,10 @@ class PokemonFragment : Fragment() {
       //  binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 
-        viewModel.loadPokemon()
-
-        viewModel.pokemon.observe(viewLifecycleOwner) { list ->
-            // binding.recyclerView.adapter = ...
-            adapter.submitList(list)
+        lifecycleScope.launch {
+            viewModel.pokemonPaging.collectLatest {
+                adapter.submitData(it)
+            }
         }
     }
 
