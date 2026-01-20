@@ -3,6 +3,14 @@
     <style name="Base.Theme.Pokedex" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#CC0000</item> <!-- Pokédex Red -->
+        <item name="colorPrimaryVariant">#FFCB05</item> <!-- Yellow accent -->
+        <item name="colorSecondary">#3B4CCA</item> <!-- Blue accents -->
+        <item name="android:statusBarColor">#CC0000</item>
+        <item name="android:navigationBarColor">#CC0000</item>
+        <item name="android:windowBackground">#F5F5F5</item>
+        <item name="android:textColorPrimary">#222222</item>
+        <item name="android:textColorSecondary">#888888</item>
     </style>
 
     <style name="Theme.Pokedex" parent="Base.Theme.Pokedex" />

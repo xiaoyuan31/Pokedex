@@ -17,7 +17,7 @@ class PokemonRepository @Inject constructor(
 
     @OptIn(ExperimentalPagingApi::class)
     fun getPokemonPaging() = Pager(
-        config = PagingConfig(pageSize = 20),
+        config = PagingConfig(pageSize = 20, enablePlaceholders = false),
         remoteMediator = PokemonRemoteMediator(api, db),
         pagingSourceFactory = { db.pokemonDao().pagingSource() }
     ).flow

@@ -10,7 +10,7 @@ import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
 @Dao
 interface PokemonDao {
 
-    @Query("SELECT * FROM pokemon ORDER BY name ASC")
+    @Query("SELECT * FROM pokemon ORDER BY id ASC")
     fun pagingSource(): PagingSource<Int ,PokemonEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

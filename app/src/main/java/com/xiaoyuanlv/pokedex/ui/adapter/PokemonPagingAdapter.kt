@@ -16,6 +16,7 @@ import com.xiaoyuanlv.pokedex.utils.PokemonUtils
 class PokemonPagingAdapter :
     PagingDataAdapter<PokemonEntity, PokemonPagingAdapter.VH>(DIFF) {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_pokemon, parent, false)
@@ -30,19 +31,16 @@ class PokemonPagingAdapter :
 
     class VH(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(pokemon: PokemonEntity) {
-            val id = PokemonUtils.getPokemonId(pokemon.url)
+            itemView.findViewById<TextView>(R.id.txtID).text = pokemon.id.toString()
             itemView.findViewById<TextView>(R.id.txtName).text = pokemon.name.replaceFirstChar { it.uppercase() }
-            val imageUrl = PokemonUtils.getImageUrl(id)
-            itemView.findViewById<ImageView>(R.id.imagePokemon).load(imageUrl) {
-                crossfade(true)
-            }
+            itemView.findViewById<ImageView>(R.id.imagePokemon).load(pokemon.imageUrl)
         }
     }
 
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<PokemonEntity>() {
             override fun areItemsTheSame(a: PokemonEntity, b: PokemonEntity) =
-                a.name == b.name
+                a.id == b.id
 
             override fun areContentsTheSame(a: PokemonEntity, b: PokemonEntity) =
                 a == b
