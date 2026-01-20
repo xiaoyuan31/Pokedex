@@ -1,9 +1,13 @@
 package com.xiaoyuanlv.pokedex.ui.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -12,6 +16,7 @@ import coil.load
 import com.xiaoyuanlv.pokedex.R
 import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
 import com.xiaoyuanlv.pokedex.utils.PokemonUtils
+import com.xiaoyuanlv.pokedex.utils.TypeColor
 
 class PokemonPagingAdapter :
     PagingDataAdapter<PokemonEntity, PokemonPagingAdapter.VH>(DIFF) {
@@ -34,6 +39,28 @@ class PokemonPagingAdapter :
             itemView.findViewById<TextView>(R.id.txtID).text = pokemon.id.toString()
             itemView.findViewById<TextView>(R.id.txtName).text = pokemon.name.replaceFirstChar { it.uppercase() }
             itemView.findViewById<ImageView>(R.id.imagePokemon).load(pokemon.imageUrl)
+
+            itemView.findViewById<LinearLayout>(R.id.typeContainer).removeAllViews()
+
+            pokemon.types.forEach { type ->
+                val badge = TextView(itemView.context).apply {
+                    text = type.capitalize()
+                    setTextColor(Color.WHITE)
+                    setPadding(16, 8, 16, 8)
+                    setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+                    background = GradientDrawable().apply {
+                        cornerRadius = 50f
+                        setColor(TypeColor.getColor(type))
+                    }
+                }
+                val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(0, 0, 8, 0)
+                }
+                itemView.findViewById<LinearLayout>(R.id.typeContainer).addView(badge, params)
+            }
         }
     }
 

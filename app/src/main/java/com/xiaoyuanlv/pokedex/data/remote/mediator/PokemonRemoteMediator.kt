@@ -10,6 +10,8 @@ import com.xiaoyuanlv.pokedex.data.local.database.PokedexDatabase
 import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
 import com.xiaoyuanlv.pokedex.data.mapper.toEntity
 import com.xiaoyuanlv.pokedex.data.remote.api.PokeApiService
+import com.xiaoyuanlv.pokedex.utils.PokemonUtils
+import com.xiaoyuanlv.pokedex.utils.extractPokemonId
 
 @OptIn(ExperimentalPagingApi::class)
 class PokemonRemoteMediator(
@@ -21,36 +23,38 @@ class PokemonRemoteMediator(
         loadType: LoadType,
         state: PagingState<Int, PokemonEntity>
     ): MediatorResult {
-        val offset = when(loadType) {
+
+        val offset = when (loadType) {
             LoadType.REFRESH -> 0
             LoadType.PREPEND -> return MediatorResult.Success(true)
-            LoadType.APPEND -> {
-                val lastItem = state.lastItemOrNull()
-                    ?: return MediatorResult.Success(endOfPaginationReached = true)
-                lastItem.id
-            }
+            LoadType.APPEND -> state.pages.sumOf { it.data.size }
         }
 
         return try {
             val response = api.getPokemonList(
-                limit = state.config.pageSize,
+                limit = 20,
                 offset = offset
             )
 
             db.withTransaction {
+
                 if(loadType == LoadType.REFRESH) {
                     db.pokemonDao().clearAll()
                 }
 
-                val entities = response.results.map {
-                    it.toEntity()
+                val entities = response.results.mapNotNull  { it ->
+                    runCatching {
+                        val detail = api.getPokemonDetail(it.url.extractPokemonId())
+                        it.toEntity(detail = detail)
+                    }.getOrNull()
                 }
 
                 db.pokemonDao().insertAll(entities)
             }
 
-            MediatorResult.Success(response.results.isEmpty())
-
+            MediatorResult.Success(
+                endOfPaginationReached = response.results.size < state.config.pageSize
+            )
         } catch (e: Exception) {
             MediatorResult.Error(e)
         }
