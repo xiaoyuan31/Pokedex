@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -18,14 +19,16 @@ import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
 import com.xiaoyuanlv.pokedex.utils.PokemonUtils
 import com.xiaoyuanlv.pokedex.utils.TypeColor
 
-class PokemonPagingAdapter :
+class PokemonPagingAdapter(
+    private val onItemClick: (Int) -> Unit
+):
     PagingDataAdapter<PokemonEntity, PokemonPagingAdapter.VH>(DIFF) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_pokemon, parent, false)
-        return VH(view)
+        return VH(view, onItemClick)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
@@ -34,13 +37,17 @@ class PokemonPagingAdapter :
         }
     }
 
-    class VH(view: View) : RecyclerView.ViewHolder(view) {
+    class VH(view: View, private val onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
         fun bind(pokemon: PokemonEntity) {
             itemView.findViewById<TextView>(R.id.txtID).text = pokemon.id.toString()
             itemView.findViewById<TextView>(R.id.txtName).text = pokemon.name.replaceFirstChar { it.uppercase() }
             itemView.findViewById<ImageView>(R.id.imagePokemon).load(pokemon.imageUrl)
 
             itemView.findViewById<LinearLayout>(R.id.typeContainer).removeAllViews()
+
+            itemView.findViewById<RelativeLayout>(R.id.rlPokemon).setOnClickListener {
+                onItemClick(pokemon.id)
+            }
 
             pokemon.types.forEach { type ->
                 val badge = TextView(itemView.context).apply {

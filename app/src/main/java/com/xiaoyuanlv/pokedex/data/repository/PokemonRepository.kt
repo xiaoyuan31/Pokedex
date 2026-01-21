@@ -22,4 +22,8 @@ class PokemonRepository @Inject constructor(
         pagingSourceFactory = { db.pokemonDao().pagingSource() }
     ).flow
 
+    suspend fun getPokemonById(id: Int): PokemonEntity? {
+        return db.pokemonDao().getPokemonById(id)
+    }
+
 }

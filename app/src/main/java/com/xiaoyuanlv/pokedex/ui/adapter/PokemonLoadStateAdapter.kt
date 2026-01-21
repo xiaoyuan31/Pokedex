@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.xiaoyuanlv.pokedex.databinding.ItemLoadStateBinding
 
 class PokemonLoadStateAdapter(
+    
     private val retry: () -> Unit
 ) : LoadStateAdapter<PokemonLoadStateAdapter.LoadStateViewHolder>() {
 

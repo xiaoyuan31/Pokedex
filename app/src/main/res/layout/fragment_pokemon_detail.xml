@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.pokemondetail.PokemonDetailFragment">
+
+    <!-- HEADER IMAGE -->
+    <ImageView
+        android:id="@+id/imageHeader"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Pokemon Header Image"/>
+
+    <!-- CONTENT CARD -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="240dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- NAME & ID -->
+                <TextView
+                    android:id="@+id/textName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pikachu"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/pokemon_solid"
+                    android:letterSpacing="0.1"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#025"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pokemon_solid"
+                    android:textColor="#777777"
+                    android:layout_marginTop="4dp"/>
+
+                <!-- TYPE BADGES -->
+                <LinearLayout
+                    android:id="@+id/typeContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"/>
+
+                <!-- POKEMON IMAGE -->
+                <ImageView
+                    android:id="@+id/imagePokemon"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:padding="12dp"
+                    android:background="@drawable/bg_image_circle"
+                    android:scaleType="centerCrop"/>
+
+                <!-- STATS CARD -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Base Stats"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+
+                        <!-- HP -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="HP"/>
+                        <ProgressBar
+                            android:id="@+id/progressHp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:max="100"/>
+
+                        <!-- ATTACK -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Attack"/>
+                        <ProgressBar
+                            android:id="@+id/progressAttack"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:max="100"/>
+
+                        <!-- DEFENSE -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Defense"/>
+                        <ProgressBar
+                            android:id="@+id/progressDefense"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:max="100"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -15,4 +15,6 @@ import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
 @TypeConverters(Converters::class)
 abstract class PokedexDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
+
+
 }

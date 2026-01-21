@@ -1,40 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/cardPokemon"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp"
-    android:background="@drawable/neo_selector"
     app:cardElevation="10dp"
     app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="true"
     android:clickable="true"
     android:focusable="true"
     android:padding="5dp">
 
 
     <RelativeLayout
+        android:id="@+id/rlPokemon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_margin="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/bg_rounded_ripple"
         >
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="# 1"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/pokemon_solid"
-            />
+            android:text="# 1" />
 
 
         <RelativeLayout
             android:id="@+id/layoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#333"
+            android:background="@drawable/bg_neumorph"
             android:orientation="horizontal"
             android:layout_below="@id/imagePokemon"
             >
@@ -81,4 +92,4 @@
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

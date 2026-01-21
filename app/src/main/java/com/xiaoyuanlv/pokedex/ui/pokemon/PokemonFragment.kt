@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.xiaoyuanlv.pokedex.databinding.FragmentPokemonBinding
@@ -22,7 +23,12 @@ class PokemonFragment : Fragment() {
     private var _binding: FragmentPokemonBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: PokemonPagingAdapter
+
+    private val adapter by lazy {
+        PokemonPagingAdapter { pokemonId ->
+            navigateToDetail(pokemonId)
+        }
+    }
     private val viewModel: PokemonViewModel by viewModels()
 
     override fun onCreateView(
@@ -43,7 +49,6 @@ class PokemonFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = PokemonPagingAdapter()
 
         // Grid layout with 2 columns
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -84,5 +89,13 @@ class PokemonFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun navigateToDetail(pokemonId: Int) {
+        val action =
+            PokemonFragmentDirections
+                .actionPokemonFragmentToPokemonDetailFragment(pokemonId)
+
+        findNavController().navigate(action)
     }
 }

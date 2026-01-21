@@ -13,6 +13,9 @@ interface PokemonDao {
     @Query("SELECT * FROM pokemon ORDER BY id ASC")
     fun pagingSource(): PagingSource<Int ,PokemonEntity>
 
+    @Query("SELECT * FROM pokemon WHERE id = :id")
+    suspend fun getPokemonById(id: Int): PokemonEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<PokemonEntity>)
 
