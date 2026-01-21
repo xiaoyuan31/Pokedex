@@ -41,7 +41,14 @@ class PokemonPagingAdapter(
         fun bind(pokemon: PokemonEntity) {
             itemView.findViewById<TextView>(R.id.txtID).text = pokemon.id.toString()
             itemView.findViewById<TextView>(R.id.txtName).text = pokemon.name.replaceFirstChar { it.uppercase() }
-            itemView.findViewById<ImageView>(R.id.imagePokemon).load(pokemon.imageUrl)
+
+            //itemView.findViewById<ImageView>(R.id.imagePokemon).load(pokemon.imageUrl)
+            val imageResId = itemView.context.resources.getIdentifier(
+                "pokemon"+pokemon.id, // "pokemon1"
+                "drawable",
+                itemView.context.packageName
+            )
+            itemView.findViewById<ImageView>(R.id.imagePokemon).setImageResource(imageResId)
 
             itemView.findViewById<LinearLayout>(R.id.typeContainer).removeAllViews()
 
