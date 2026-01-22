@@ -10,6 +10,15 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.pokemondetail.PokemonDetailFragment">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/detailToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        android:titleTextColor="@android:color/white"
+        app:title="Pokémon Detail"/>
 
     <!-- HEADER IMAGE -->
     <ImageView
