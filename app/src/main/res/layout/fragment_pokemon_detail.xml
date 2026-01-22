@@ -152,10 +152,127 @@
                             android:indeterminate="false"
                             android:max="100"/>
 
+                        <!-- SPEED -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="12dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Speed"
+                                    android:textStyle="bold"
+                                    android:textColor="#333333"/>
+
+                                <TextView
+                                    android:id="@+id/tvSpeedValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="65"
+
+                                    android:textColor="#666666"/>
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/pbSpeed"
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                android:layout_marginTop="4dp"
+                                android:max="100"
+                                android:progress="65"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:progressDrawable="@drawable/progress_pokedex"
+                                android:indeterminate="false"/>
+                        </LinearLayout>
 
 
+                        <!-- SPECIAL ATTACK -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="12dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Sp. Attack"
+                                    android:textStyle="bold"
+                                    android:textColor="#333333"/>
+
+                                <TextView
+                                    android:id="@+id/tvSpAttackValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="80"
+                                    android:textColor="#666666"/>
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/pbSpAttack"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                android:layout_marginTop="4dp"
+                                android:max="100"
+                                android:progress="80"
+                                android:progressDrawable="@drawable/progress_pokedex"/>
+                        </LinearLayout>
 
 
+                        <!-- SPECIAL DEFENSE -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="12dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Sp. Defense"
+                                    android:textStyle="bold"
+                                    android:textColor="#333333"/>
+
+                                <TextView
+                                    android:id="@+id/tvSpDefenseValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="70"
+                                    android:textColor="#666666"/>
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/pbSpDefense"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                android:layout_marginTop="4dp"
+                                android:max="100"
+                                android:progress="70"
+
+                                android:progressDrawable="@drawable/progress_pokedex"/>
+                        </LinearLayout>
 
                     </LinearLayout>
 

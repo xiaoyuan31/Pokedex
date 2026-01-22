@@ -117,9 +117,18 @@ class PokemonDetailFragment : Fragment() {
         binding.progressDefense.clearAnimation()
         binding.progressDefense.startAnimation(anim3)
 
+        binding.tvSpeedValue.text = pokemon.speed.toString()
+        binding.pbSpeed.setProgress(pokemon.speed)
+
+        binding.tvSpAttackValue.text = pokemon.specialAttack.toString()
+        binding.pbSpAttack.setProgress(pokemon.specialAttack)
+
+        binding.tvSpDefenseValue.text = pokemon.specialDefense.toString()
+        binding.pbSpDefense.setProgress(pokemon.specialDefense)
 
 
-           }
+
+    }
 
 }
 
