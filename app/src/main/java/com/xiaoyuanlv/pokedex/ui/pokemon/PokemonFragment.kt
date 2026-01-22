@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.xiaoyuanlv.pokedex.R
 import com.xiaoyuanlv.pokedex.databinding.FragmentPokemonBinding
 import com.xiaoyuanlv.pokedex.ui.adapter.PokemonLoadStateAdapter
 import com.xiaoyuanlv.pokedex.ui.adapter.PokemonPagingAdapter
@@ -25,8 +28,8 @@ class PokemonFragment : Fragment() {
 
 
     private val adapter by lazy {
-        PokemonPagingAdapter { pokemonId ->
-            navigateToDetail(pokemonId)
+        PokemonPagingAdapter { pokemonId,vh ->
+            navigateToDetail(pokemonId, vh)
         }
     }
     private val viewModel: PokemonViewModel by viewModels()
@@ -91,11 +94,11 @@ class PokemonFragment : Fragment() {
         _binding = null
     }
 
-    private fun navigateToDetail(pokemonId: Int) {
+    private fun navigateToDetail(pokemonId: Int, vh: PokemonPagingAdapter.VH) {
         val action =
             PokemonFragmentDirections
                 .actionPokemonFragmentToPokemonDetailFragment(pokemonId)
-
-        findNavController().navigate(action)
+        val extras = FragmentNavigatorExtras(vh.itemView.findViewById<ImageView>(R.id.imagePokemon) to "pokemon_image")
+        findNavController().navigate(action, extras)
     }
 }

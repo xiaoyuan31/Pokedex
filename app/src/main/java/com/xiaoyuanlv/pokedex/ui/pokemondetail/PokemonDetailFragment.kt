@@ -13,6 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.transition.MaterialContainerTransform
 import com.xiaoyuanlv.pokedex.R
 import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
 import com.xiaoyuanlv.pokedex.databinding.FragmentPokemonBinding
@@ -35,6 +38,16 @@ class PokemonDetailFragment : Fragment() {
     ): View? {
         binding = FragmentPokemonDetailBinding.inflate(inflater)
 
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.detailRoot
+            duration = 300L
+            scrimColor = Color.TRANSPARENT
+            setAllContainerColors(Color.WHITE) // Optional
+        }
+
+        binding.imageHeader.transitionName = "pokemon_image"
+
+       
         viewModel.pokemonDetail.observe(viewLifecycleOwner) { pokemon ->
             if(pokemon != null) {
                 bindPokemon(pokemon)
@@ -56,8 +69,21 @@ class PokemonDetailFragment : Fragment() {
             "drawable",
             requireContext().packageName
         )
-        binding.imagePokemon.setImageResource(imageResId)
+       // binding.imagePokemon.setImageResource(imageResId)
         binding.imageHeader.setImageResource(imageResId)
+
+        binding.imageHeader.transitionName = "pokemon_image"
+
+        // Postpone enter transition until image is loaded
+        postponeEnterTransition()
+
+        binding.imageHeader.load(imageResId) {
+            listener(
+                onSuccess = { _, _ -> startPostponedEnterTransition() },
+                onError = { _, _ -> startPostponedEnterTransition() }
+            )
+        }
+
 
         // Name and ID
         binding.textName.text = pokemon.name.replaceFirstChar { it.uppercase() }
@@ -126,6 +152,22 @@ class PokemonDetailFragment : Fragment() {
         binding.tvSpDefenseValue.text = pokemon.specialDefense.toString()
         binding.pbSpDefense.setProgress(pokemon.specialDefense)
 
+
+        val toolbar = binding.detailToolbar
+        // Set as ActionBar if you have activity support
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        // Enable back button
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        // Handle back navigation
+        toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        // Set dynamic title (Pokémon name)
+        toolbar.title = pokemon.name
 
 
     }

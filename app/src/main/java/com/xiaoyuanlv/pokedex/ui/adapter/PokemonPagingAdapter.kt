@@ -10,17 +10,22 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.xiaoyuanlv.pokedex.R
 import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
+import com.xiaoyuanlv.pokedex.databinding.FragmentPokemonBinding
+import com.xiaoyuanlv.pokedex.ui.pokemon.PokemonFragmentDirections
 import com.xiaoyuanlv.pokedex.utils.PokemonUtils
 import com.xiaoyuanlv.pokedex.utils.TypeColor
 
 class PokemonPagingAdapter(
-    private val onItemClick: (Int) -> Unit
+    private val onItemClick: (Int, VH) -> Unit
 ):
     PagingDataAdapter<PokemonEntity, PokemonPagingAdapter.VH>(DIFF) {
 
@@ -37,7 +42,7 @@ class PokemonPagingAdapter(
         }
     }
 
-    class VH(view: View, private val onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
+    class VH(view: View, private val onItemClick: (Int, VH) -> Unit) : RecyclerView.ViewHolder(view) {
         fun bind(pokemon: PokemonEntity) {
             itemView.findViewById<TextView>(R.id.txtID).text = pokemon.id.toString()
             itemView.findViewById<TextView>(R.id.txtName).text = pokemon.name.replaceFirstChar { it.uppercase() }
@@ -53,7 +58,7 @@ class PokemonPagingAdapter(
             itemView.findViewById<LinearLayout>(R.id.typeContainer).removeAllViews()
 
             itemView.findViewById<RelativeLayout>(R.id.rlPokemon).setOnClickListener {
-                onItemClick(pokemon.id)
+                onItemClick(pokemon.id, this)
             }
 
             pokemon.types.forEach { type ->
