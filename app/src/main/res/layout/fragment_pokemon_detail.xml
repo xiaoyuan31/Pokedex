@@ -10,6 +10,22 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.pokemondetail.PokemonDetailFragment">
 
+
+
+    <!-- HEADER IMAGE -->
+    <ImageView
+        android:id="@+id/imageHeader"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="?actionBarSize"
+        android:contentDescription="Pokemon Header Image"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="#B4000000"/>
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/detailToolbar"
         android:layout_width="match_parent"
@@ -19,19 +35,6 @@
         android:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
         android:titleTextColor="@android:color/white"
         app:title="Pokémon Detail"/>
-
-    <!-- HEADER IMAGE -->
-    <ImageView
-        android:id="@+id/imageHeader"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="Pokemon Header Image"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:background="#B4000000"/>
 
     <!-- CONTENT CARD -->
     <com.google.android.material.card.MaterialCardView
