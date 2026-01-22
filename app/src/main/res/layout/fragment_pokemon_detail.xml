@@ -119,6 +119,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             style="?android:attr/progressBarStyleHorizontal"
+                            android:progressDrawable="@drawable/progress_hp"
+                            android:indeterminate="false"
                             android:max="100"/>
 
                         <!-- ATTACK -->
@@ -131,7 +133,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             style="?android:attr/progressBarStyleHorizontal"
-                            android:max="100"/>
+                            android:progressDrawable="@drawable/progress_pokedex"
+                            android:indeterminate="false"
+                            android:max="100"
+                            />
 
                         <!-- DEFENSE -->
                         <TextView
@@ -143,7 +148,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             style="?android:attr/progressBarStyleHorizontal"
+                            android:progressDrawable="@drawable/progress_pokedex"
+                            android:indeterminate="false"
                             android:max="100"/>
+
+
+
+
+
 
                     </LinearLayout>
 

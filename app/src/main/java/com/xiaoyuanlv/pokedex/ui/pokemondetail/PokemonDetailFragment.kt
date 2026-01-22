@@ -12,11 +12,13 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
+import android.view.animation.AnimationUtils
 import com.xiaoyuanlv.pokedex.R
 import com.xiaoyuanlv.pokedex.data.local.entity.PokemonEntity
 import com.xiaoyuanlv.pokedex.databinding.FragmentPokemonBinding
 import com.xiaoyuanlv.pokedex.databinding.FragmentPokemonDetailBinding
 import com.xiaoyuanlv.pokedex.utils.TypeColor
+import com.xiaoyuanlv.pokedex.utils.setProgressSmooth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -82,10 +84,42 @@ class PokemonDetailFragment : Fragment() {
         }
 
         // Stats
-        binding.progressHp.progress = pokemon.hp
-        binding.progressAttack.progress = pokemon.attack
-        binding.progressDefense.progress = pokemon.defense
-    }
+        binding.progressHp.setProgressSmooth(pokemon.hp)
+        binding.progressAttack.setProgressSmooth(pokemon.attack)
+        binding.progressDefense.setProgressSmooth(pokemon.defense)
+
+        val anim = AnimationUtils.loadAnimation(
+            binding.progressHp.context,
+            R.anim.fade_scale
+        )
+
+        binding.progressHp.visibility = View.VISIBLE
+        binding.progressHp.clearAnimation()
+        binding.progressHp.startAnimation(anim)
+
+
+        val anim2 = AnimationUtils.loadAnimation(
+            binding.progressAttack.context,
+            R.anim.fade_scale
+        )
+
+        binding.progressAttack.visibility = View.VISIBLE
+        binding.progressAttack.clearAnimation()
+        binding.progressAttack.startAnimation(anim2)
+
+
+        val anim3 = AnimationUtils.loadAnimation(
+            binding.progressDefense.context,
+            R.anim.fade_scale
+        )
+
+        binding.progressDefense.visibility = View.VISIBLE
+        binding.progressDefense.clearAnimation()
+        binding.progressDefense.startAnimation(anim3)
+
+
+
+           }
 
 }
 
