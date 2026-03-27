@@ -21,5 +21,3 @@ This project is written in **Kotlin** and structured as an Android app.
 - 📁 Organized in `app/` and `gradle/` folders
 
 *(Add more details here depending on what libraries/architecture you used — e.g., Jetpack, MVVM, Retrofit, Room, etc.)*
-
-## 📁 Project Structure
